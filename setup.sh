@@ -14,7 +14,6 @@ instalar_pacotes=(
 	git
 	imagemagick
 	kcolorchooser
-	kleopatra
 	kolourpaint
 	libreoffice-l10n-pt-br
 	lolcat
