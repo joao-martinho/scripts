@@ -12,7 +12,6 @@ instalar_pacotes=(
 	fortune
 	ghostwriter
 	git
-	imagemagick
 	kcolorchooser
 	kleopatra
 	kolourpaint
@@ -30,6 +29,8 @@ instalar_pacotes=(
 remover_pacotes=(
 	akregator
 	dragonplayer
+	gimp
+	imagemagick
 	juk
 	kaddressbook
 	kdeconnect
@@ -58,6 +59,8 @@ backup_itens=(
 	"/home/joao/Área de trabalho/dotfiles/custom.cfg|/boot/grub/custom.cfg|arquivo"
 
 	# Pendrive
+	"/media/joao/Backup/.mozilla|/home/joao|pasta"
+	"/media/joao/Backup/.thunderbird|/home/joao|pasta"
 	"/media/joao/Backup/Documentos|/home/joao/Documentos|conteudo"
 	"/media/joao/Backup/Imagens|/home/joao/Imagens|conteudo"
 	"/media/joao/Backup/Modelos|/home/joao/Modelos|conteudo"
@@ -71,6 +74,8 @@ comandos_avulsos=(
 	# "printf 'n\n\ny\n/home/joao/.gf\n1\n\n' | /media/joao/Backup/Jogos/gf.sh"
 	"sudo rm /home/joao/.face"
 	"sudo rm /home/joao/.face.icon"
+	"sudo rm /usr/share/applications/fortune.desktop"
+	"sudo rm /usr/share/applications/txdoctk.desktop"
 )
 
 log() {
@@ -218,6 +223,7 @@ main() {
 			restaurar_backup
 			customizar_grub
 			configurar_sudo
+			executar_comandos_avulsos
 			corrigir_permissoes_home
 			;;
 		*)

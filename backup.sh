@@ -7,6 +7,8 @@ DESTINO="/media/joao/Backup"
 ORIGENS=(
     # "/home/joao/.config/StardewValley/Saves"
     "/home/joao/.git-credentials"
+    "/home/joao/.mozilla"
+    "/home/joao/.thunderbird"
     "/home/joao/Área de trabalho/Concurso"
     "/home/joao/Área de trabalho/dotfiles/setup.sh"
     "/home/joao/Área de trabalho/Jogos"
