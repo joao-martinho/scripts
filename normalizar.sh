@@ -1,6 +1,10 @@
-find . -type f \( -iname '*.mkv' -o -iname '*.mp4' \) -print0 |
+#!/bin/bash
+
+find . -type f \( -iname '*.mkv' -o -iname '*.mp4' -o -iname '*.avi' \) -print0 |
 while IFS= read -r -d $'\0' f; do
+    echo "--------------------------------------------------"
     echo "Processando: $f"
+    echo "--------------------------------------------------"
 
     case "${f,,}" in
         *.mkv)
@@ -8,34 +12,34 @@ while IFS= read -r -d $'\0' f; do
 
         first_audio_id=$(mkvmerge -J "$f" | jq -r '.tracks[] | select(.type=="audio") | .id' | head -n 1)
 
-        cmd=(mkvmerge -o "$tmp" \
+        audio_args=()
+        if [ -n "$first_audio_id" ]; then
+            audio_args=(--audio-tracks "$first_audio_id" --language "$first_audio_id:und")
+        fi
+
+        mkvmerge -o "$tmp" \
             --title "" \
             --no-chapters \
             --no-track-tags \
             --no-global-tags \
             --no-attachments \
-            --no-subtitles)
+            --no-subtitles \
+            "${audio_args[@]}" \
+            "$f"
 
-        [ -n "$first_audio_id" ] && cmd+=(--audio-tracks "$first_audio_id")
-
-        for i in 0 1 2 3; do
-            cmd+=(--track-name "$i:")
-        done
-
-        [ -n "$first_audio_id" ] && cmd+=(--language "$first_audio_id:und")
-
-        cmd+=("$f")
-
-        if "${cmd[@]}"; then
+        status=$?
+        if [ $status -eq 0 ] || [ $status -eq 1 ]; then
             mv -f "$tmp" "$f"
+            echo "Sucesso (MKV): $f"
         else
-            echo "Erro (MKV): $f"
+            echo "Erro real (MKV): $f (Código de saída: $status)"
             rm -f "$tmp"
         fi
         ;;
 
-        *.mp4)
-        tmp="${f%.mp4}.tmp.mp4"
+        *.mp4|*.avi)
+        ext="${f##*.}"
+        tmp="${f%.*}.tmp.${ext}"
 
         ffmpeg -nostdin -v error -y \
             -ignore_chapters 1 \
@@ -54,8 +58,9 @@ while IFS= read -r -d $'\0' f; do
 
         if [ $? -eq 0 ]; then
             mv -f "$tmp" "$f"
+            echo "Sucesso (${ext^^}): $f"
         else
-            echo "Erro (MP4): $f"
+            echo "Erro (${ext^^}): $f"
             rm -f "$tmp"
         fi
         ;;
