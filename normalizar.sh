@@ -42,7 +42,6 @@ while IFS= read -r -d $'\0' f; do
         tmp="${f%.*}.tmp.${ext}"
 
         ffmpeg -nostdin -v error -y \
-            -ignore_chapters 1 \
             -i "$f" \
             -map 0:v:0 \
             -map 0:a:0? \

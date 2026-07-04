@@ -32,8 +32,8 @@ coletar_srt() {
 
 formatar_nome_diretorio() {
     local nome_base="$1"
-    if [[ "$nome_base" =~ ^[Tt][Hh][Ee]\ (.*)$ ]]; then
-        echo "${BASH_REMATCH[1]}, The"
+    if [[ "$nome_base" =~ ^([Tt][Hh][Ee]|[Aa][Nn]?)\ (.*)$ ]]; then
+        echo "${BASH_REMATCH[2]}, ${BASH_REMATCH[1]}"
     else
         echo "$nome_base"
     fi
