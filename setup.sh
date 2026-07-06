@@ -60,8 +60,6 @@ backup_itens=(
 
 	# Pendrive
 	"/media/joao/Backup/.git-credentials|/home/joao/.git-credentials|arquivo"
-	"/media/joao/Backup/.mozilla|/home/joao|pasta"
-	"/media/joao/Backup/.thunderbird|/home/joao|pasta"
 	"/media/joao/Backup/Documentos|/home/joao/Documentos|conteudo"
 	"/media/joao/Backup/Imagens|/home/joao/Imagens|conteudo"
 	"/media/joao/Backup/Modelos|/home/joao/Modelos|conteudo"
