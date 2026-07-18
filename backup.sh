@@ -8,7 +8,7 @@ ORIGENS=(
     "/home/joao/.git-credentials"
     "/home/joao/.gitconfig"
     "/home/joao/Área de trabalho/Concurso"
-    "/home/joao/Área de trabalho/Dotfiles/setup.sh"
+    "/home/joao/Área de trabalho/Scripts/setup.sh"
     "/home/joao/Área de trabalho/Temporário"
     "/home/joao/Documentos"
     "/home/joao/Imagens"
